@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 import numpy as np
-import simulator_function as f
+from demo_visual import simulator_function as f
 
 # setting the x - coordinates
 mu = 14
@@ -16,8 +16,8 @@ function = f.makeGaussian(mu, step, sigma, max_value)
 x = np.linspace(norm.ppf(0.01), norm.ppf(0.99), 100)
 
 # potting the points
-# plt.plot(*function)
-plt.plot(x, norm.pdf(x, 0, sigma))
+plt.plot(*function)
+# plt.plot(x, norm.pdf(x, 0, sigma))
 
 # function to show the plot
 plt.show()
