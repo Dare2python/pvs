@@ -14,9 +14,18 @@ def makeGaussian(mu=14, step=0.3, sigma=3, max_value=3.3):
     sigma is the standard deviation.
     """
 
-    x = np.arange(mu - 3*sigma, mu + 3*sigma, step, float)
+    #x = np.arange(0, 24, step, float)
+    #y = max_value * 1/(sigma * np.sqrt(2 * np.pi)*0.13) \
+    #    * np.exp(- (x - mu)**2 / (2 * sigma**2))
 
-    y = max_value * 1/(sigma * np.sqrt(2 * np.pi)*0.13) \
-        * np.exp(- (x - mu)**2 / (2 * sigma**2))
+    # hstack approach for combining
+    x = np.arange(0, 24, step, float)
+    y = max_value - (mu - x) ** 2
+
+    # f(8 a.m.) == 400 (=check8)
 
     return x, y
+
+# two ways to create complex function
+# https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfunction.html
+# https://docs.scipy.org/doc/numpy/reference/generated/numpy.hstack.html?highlight=hstack#numpy.hstack
