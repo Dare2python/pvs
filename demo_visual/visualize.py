@@ -8,7 +8,7 @@ from demo_visual import simulator_function as f
 mu = 14
 step = 0.3
 sigma = 3
-max_value = 1  # kW power
+max_value = 3300  # kW power
 
 # setting the corresponding y - coordinates
 function = f.makeGaussian(mu, step, sigma, max_value)
@@ -17,7 +17,7 @@ x = np.linspace(norm.ppf(0.01), norm.ppf(0.99), 100)
 
 # potting the points
 plt.plot(*function)
-# plt.plot(x, norm.pdf(x, 0, sigma))
+# plt.plot(x, norm.pdf(x, 14, sigma))
 
 # function to show the plot
 plt.show()

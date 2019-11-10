@@ -16,7 +16,7 @@ def makeGaussian(mu=14, step=0.3, sigma=3, max_value=3.3):
 
     x = np.arange(mu - 3*sigma, mu + 3*sigma, step, float)
 
-    y = max_value * 1/(sigma * np.sqrt(2 * np.pi)) \
+    y = max_value * 1/(sigma * np.sqrt(2 * np.pi)*0.13) \
         * np.exp(- (x - mu)**2 / (2 * sigma**2))
 
     return x, y

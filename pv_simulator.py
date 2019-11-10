@@ -7,17 +7,25 @@
 import json
 import pika
 from datetime import datetime
+import numpy as np
+
+
+def simulate(x):
+    mu = 14
+    sigma = 3
+    return 3300*1/(sigma * np.sqrt(2 * np.pi)*0.13) * np.exp(- (x - mu)**2 / (2 * sigma**2))
 
 
 def callback(ch, method, properties, body):
-    # print("rx {}".format(body))
+    # JSON format is chosen for debugging and demo visibility purposes
+    # I would go for anything binary for production
     message = json.loads(body)
     message['timestamp'] = datetime.fromtimestamp(message['timestamp'])
     print("rx {}".format(message))
 
-    # meter_object = {'timestamp': datetime.fromtimestamp(message['timestamp']),
-    #                 'power_value': float(message['power_value'])}
-    # print("rx {}".format(meter_object))
+    d = message['timestamp']
+    x = d.hour + d.minute/60 + d.second/60/60 + d.microsecond/60/60/60
+    print("x={} y={}".format(x, simulate(x)))
 
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
