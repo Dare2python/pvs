@@ -42,7 +42,7 @@ with pika.BlockingConnection(pika.ConnectionParameters('localhost', credentials=
     channel = connect(connection)
     # The period of a day with samples every couple of seconds would be enough.
     today = datetime.now().replace(microsecond=0)  # make timestamp sorter by truncating microseconds
-    for seconds in range(24):  # * 60 * 30):
+    for seconds in range(24 * 60 * 30):
         publish(channel, generate(today, seconds))
 
 # connection.close()  # with must take care of this

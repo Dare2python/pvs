@@ -25,7 +25,15 @@ def callback(ch, method, properties, body):
 
     d = message['timestamp']
     x = d.hour + d.minute/60 + d.second/60/60 + d.microsecond/60/60/60
-    print("x={} y={}".format(x, simulate(x)))
+
+    pv_power_value = simulate(x)
+    print("x={} y={}".format(x, pv_power_value))
+
+    with open('results.csv', 'a+') as the_file:
+        the_file.write('{},{},{},{}\n'.format(message['timestamp'],
+                                              message['power_value'],
+                                              pv_power_value,
+                                              pv_power_value+message['power_value']))
 
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
