@@ -70,4 +70,35 @@ Wolfram|Alpha and then Wolfram Cloud proved to be more powerful and interesting 
 * `simulator_function.py` contains code and comments used to approximate the PV emulator function. The script uses `numpy` which is installed with help of `requirements.txt` described in `demo_rabbit` folder section. Of course you are free to setup your environement independently.
 * `visualize.py` makes `pyplot` plot of the simulator function from `simulator_function.py`. `scipy.stats` is used to play with "original" Gaussian PDF (probability density function) `norm.ppf`.
 
+### Images folder
+is used to store pictures which illustrate this Guide.
 
+### "root" folder
+This folder contains "main" results for this little task.
+
+* `.gitignore` is options for git/GitHub to ignore unnecessary files.
+* `FunctionApproximationByWolframCloud.pdf` is an export from Wolfram Cloud notebook which perfectly shows graphs if the notebook is not accessible by whatever reason. This makes the repo self-sufficient.
+* `README.md` is this Guide itself.
+* `requirements.txt` is `pip` way to manage Python dependencies.
+
+Next two files are "the most important" ones in this repository.
+Assuming that the environment is setup properly (Python 3, venv, dependencies, Docker engine, RabbitMQ docker container and RabbitMQ credentials) these files "demonstrate" to console PV Simulator messages worth of 24 hours. Those messages are handled and stored to file `results.csv` as requested.
+
+* `meter.py` connects to RabbitMQ instance (which is setup using script `demo_rabbit/rabbit_start.sh`). Then generates messages with random `power_value` and `timestamp` starting from `now` and for 24 hours in future every "couple seconds" (2 seconds exactly).
+* `pv_simulator.py` connects to RabbitMQ instance ans sets a callback to listen incoming messages. Those messages are stored to file. Each message is stored as text line in the requested format with opening for append the result file `results.csv` and closing OS file handler after 1 message/row. This simplistic approach has to be changed for production e.g. batching messages handling (`prefetch_count`) and batching write to file. Of course production case must use multiple consumers to load balance and scale out purposes eliminating SPoF (single point of failure) as well. 
+
+## Notes on architecture and current implementation
+
+As mentioned through the Guide this implementation is only to cover bare minimum of the task.
+
+Enjoying my unlimited time frame I plan:
+* make multiple consumers
+* each consumer handling several messages at once
+* each consumer is running as a container (Docker or other for fun)
+* make `meter` as a container as well
+* setup K8s to orchestrate several `meter`s and several consumers (`pv_simulator`)
+* setup a Public Cloud environment for K8s (Azure or AWS depending where I have free subscription left)
+* setup CI/CD pipeline to implement GitOps flow for the project
+* examine security angles, make pentest, and implement DevSecOps practices
+
+All this I am planning to do just for fun. It's more like DevOps or Security Officer than Development.
