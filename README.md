@@ -45,7 +45,7 @@ After several experiments I gave preference to Gaussian combined with two simple
 #### Two Python scripts
 This folder contains two simple Python scripts to demonstrate RabbitMQ functionality. This is an excellent way to check that RabbitMQ is deployed (via Docker, more and that in another section) with proper credentials and proper version and configuration (very close to default one).
 
-In order to run those two Python scripts (and others in this repository) please ensure your environment has proper dependencies. The simplest way to install the dependencies is to run in local Python Virtual Environment (more on Python install and venv setup in another section) a following command:
+In order to run those two Python 3 scripts (and others in this repository) please ensure your environment has proper dependencies. The simplest way to install the dependencies is to run in local Python Virtual Environment (more on Python install and venv setup in another section) a following command:
 ```shell script
 pip install -r requirements.txt
 ```
@@ -61,5 +61,13 @@ Please note that scripts will pull RabbitMQ Docker image if it is absent in loca
 * `rabbit_start.sh` when run is starting Docker image of proper version (3.8.1) with default user (`user`) and default password (`Munich19`). It setups port mapping (`8080:15672  5672:5672`). First one is to open [RabbitMQ web management console](http://localhost:8080 "RabbitMQ Mgm"). The second port is for accessing the RabbitMQ instance from host (using default port `5672`).
 * `rabbit_list.sh` checks that RabbitMQ container is running in local docker instance and shows all `queues` in the local RabbitMQ instance (in Docker container).
 * `rabbit_clear.sh` stops and removes RabbitMQ container (and its all data and queues of course).
+
+### demo_visual folder
+The folder contains two simple Python 3 scripts `simulator_function.py` and `visualize.py`. 
+This folder was used to "play" with mathematical definitions and visualization of hypothesis.
+Wolfram|Alpha and then Wolfram Cloud proved to be more powerful and interesting tool for researching and experimenting with math concepts and practical approximations. The Wolfram Cloud notebooks and related exports are explained in another section.
+
+* `simulator_function.py` contains code and comments used to approximate the PV emulator function. The script uses `numpy` which is installed with help of `requirements.txt` described in `demo_rabbit` folder section. Of course you are free to setup your environement independently.
+* `visualize.py` makes `pyplot` plot of the simulator function from `simulator_function.py`. `scipy.stats` is used to play with "original" Gaussian PDF (probability density function) `norm.ppf`.
 
 
