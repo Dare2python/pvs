@@ -39,7 +39,7 @@ def callback(ch, method, properties, body):
 
 
 credentials = pika.PlainCredentials('user', 'Munich19')
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost', credentials=credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters('some-rabbit', credentials=credentials))
 channel = connection.channel()
 channel.queue_declare(queue='meter', durable=True)  # queue declaration is idempotent
 channel.basic_consume(queue='meter',
