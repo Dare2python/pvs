@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # importing the required modules
 import matplotlib.pyplot as plt
 from scipy.stats import norm

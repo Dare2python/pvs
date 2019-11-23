@@ -3,7 +3,7 @@
 ## Task
 To build an application which generates simulated PV (photovoltaic) power values (in kW)
 
-### Simulator function approximation
+## Simulator function approximation
 The picture of a real PV power output curve during a normal day is given as input.
 
 Apparently we have to approximate the function and use it for the simulation.
@@ -18,14 +18,14 @@ The analytical investigation and mathematical experiments in Wolfram Alpha and t
 2. Inverted parabola curve
 ![The Gaussian curve picture in Images folder](Images/ParabolaApproximation.png)
 
-#### Mathematical notes
+### Mathematical notes
 The notes are available as [Wolfram Cloud notebook](https://www.wolframcloud.com/obj/13406c33-e24d-433b-89bf-a25c91523a9d).
 
 The notebook [source code](https://www.wolframcloud.com/env/for.key/normpdf.nb).
 
 To ease access it was exported to pdf [online](https://www.wolframcloud.com/pdf/d369b39dc4094799a1e20dc84120b9a1) and [locally](FunctionApproximationByWolframCloud.pdf)
 
-#### Python representation
+### Python representation
 1. Gaussian curve
 ```python
     x = np.arange(0, 24, step, float)
@@ -39,6 +39,28 @@ To ease access it was exported to pdf [online](https://www.wolframcloud.com/pdf/
 ```
 
 After several experiments I gave preference to Gaussian combined with two simple lines (left and right endings) to cut the Gaussian long tails.
+
+## Deployment and configuration
+
+### Overview
+The program runs on Python 3, Docker engine, RabbitMQ 3.
+
+#### Python
+The program is written on Python 3.7.5 for Mac and tested on version 3.7.4 for Windows.
+
+To check available Python please run:
+```bash
+python --version
+
+```
+
+Py files have Shebang line and could run from command line.
+For example:
+```bash
+cd demo_visual
+chmod +x ./visualize.py
+./visualize.py
+```
 
 ## Repository structure
 ### demo_rabbit folder
